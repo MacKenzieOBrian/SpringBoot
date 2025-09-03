@@ -15,12 +15,14 @@ import com.example.demo.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder; // Inject PasswordEncoder
+    private final PasswordEncoder passwordEncoder;
+    private final com.example.demo.repository.AccountRepository accountRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, com.example.demo.repository.AccountRepository accountRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.accountRepository = accountRepository;
     }
 
     @Transactional(readOnly = true) // Good practice for read operations
@@ -40,9 +42,18 @@ public class UserService {
 
     @Transactional // Default transactionality (read/write)
     public User saveUser(User user) {
-        // Encode the password before saving
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    // Encode the password before saving
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    User savedUser = userRepository.save(user);
+    // Create account for new user
+    com.example.demo.model.Account account = new com.example.demo.model.Account();
+    account.setUser(savedUser);
+    account.setBalance(java.math.BigDecimal.ZERO);
+    account.setMinimumBalance(java.math.BigDecimal.ZERO);
+    account.setStatus(com.example.demo.model.Account.AccountStatus.ACTIVE);
+    account.setCurrency("USD");
+    accountRepository.save(account);
+    return savedUser;
     }
 
     @Transactional

@@ -1,3 +1,10 @@
+
+/*
+ * User.java
+ * Purpose: Represents an application user, including authentication details and profile info.
+ * Why needed: Central to user management, login, and security. Implements UserDetails for Spring Security.
+ * Reference: 
+ */
 package com.example.demo.model;
 
 import java.util.Collection;
@@ -6,11 +13,16 @@ import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -18,6 +30,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor; // Import Collections
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -74,6 +87,9 @@ public class User implements UserDetails {
     public String getName() {
         return name;
     }
+    
+        @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        private Account account;
 
     public void setName(String name) {
         this.name = name;

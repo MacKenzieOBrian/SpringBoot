@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring Boot JWT Demo</title>
+    <title>Spring Boot Fintech Demo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Spring Boot JWT Demo</h1>
+        <h1>Spring Boot Fintech Demo</h1>
 
         <div class="auth-section">
             <h2>Register</h2>
@@ -35,6 +35,50 @@
             <button id="get-users-button">Get All Users (Requires Login)</button>
             <div id="users-list"></div>
             <p id="api-message"></p>
+        </div>
+
+        <!-- Fintech Features -->
+        <div class="fintech-section">
+            <h2>Account Information</h2>
+            <button id="get-account-info">Show My Account Info</button>
+            <div id="account-info"></div>
+            <p id="account-message"></p>
+        </div>
+
+        <div class="fintech-section">
+            <h2>Deposit Funds</h2>
+            <form id="deposit-form">
+                <input type="number" id="deposit-amount" placeholder="Amount" min="1" required>
+                <input type="text" id="deposit-description" placeholder="Description (optional)">
+                <button type="submit">Deposit</button>
+            </form>
+            <p id="deposit-message"></p>
+        </div>
+
+        <div class="fintech-section">
+            <h2>Withdraw Funds</h2>
+            <form id="withdraw-form">
+                <input type="number" id="withdraw-amount" placeholder="Amount" min="1" required>
+                <input type="text" id="withdraw-description" placeholder="Description (optional)">
+                <button type="submit">Withdraw</button>
+            </form>
+            <p id="withdraw-message"></p>
+        </div>
+
+        <div class="fintech-section">
+            <h2>Transaction History</h2>
+            <button id="get-transactions">Show My Transactions</button>
+            <div id="transaction-history"></div>
+        </div>
+
+        <div class="fintech-section">
+            <h2>Create Post (Costs Money)</h2>
+            <form id="create-post-form">
+                <input type="text" id="post-title" placeholder="Title" required>
+                <textarea id="post-content" placeholder="Content" required></textarea>
+                <button type="submit">Create Post</button>
+            </form>
+            <p id="post-message"></p>
         </div>
     </div>
 
