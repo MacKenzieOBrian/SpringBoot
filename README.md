@@ -1,9 +1,9 @@
 
 # Spring Boot Fintech Demo
 
-This project demonstrates a secure fintech web application using Spring Boot, Java, and web technologies. It covers user registration, authentication, account management, transactions, and post creation, all integrated with a simple frontend. The project is designed to be educational and approachable for students.
+This project demonstrates a secure fintech web application using Spring Boot, Java, and web technologies. It covers user registration, authentication, account management, transactions  and post creation, all integrated with a simple frontend. 
 
-The project is organized so that models define the data objects used throughout the system, while repositories handle persistence—reading and writing to the database without the need for explicit SQL. Services are where the business rules live, controllers act as the bridge between frontend requests and backend logic, exposing endpoints for interaction. Then a static folder holds frontend assets, and a central configuration file (application.properties) defines database connections, ports, and other application-level settings.
+The project is organized so that models define the data objects used throughout the system, while repositories handle persistence—reading and writing to the database without the need for explicit SQL. Services are where the business rules live, controllers act as the bridge between frontend requests and backend logic, exposing endpoints for interaction. Then a static folder holds frontend assets, and a central configuration file (application.properties) defines database connections, ports and other application settings.
 
 The first step is to define a User entity which is a password, name, and email. Other entities extend the functionality. An Account tracks each user’s balance and status, while Transaction logs deposits, withdrawals, or fees. A Post entity demonstrates how users can create and manage content within the system.
 Spring Data JPA allows you to declare repositories that automatically provide CRUD functionality. Extending JpaRepository I can instantly query entities without boilerplate code. For example UserRepository handles users, while AccountRepository manages accounts.
